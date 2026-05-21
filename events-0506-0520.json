@@ -927,30 +927,6 @@
     "aggregateversion": 1
   },
   {
-    "id": "019dfdc2-04df-7c6d-ad34-f959c307c9c7",
-    "data": {
-      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-      "current": true,
-      "instanceId": "019dd0a4-d0f0-7ca5-804b-8dbd99c40b56",
-      "snapshotId": "019dfdc2-04d8-7916-b652-239c9676e6d2",
-      "description": "initial snapshot",
-      "snapshotType": "USER_SAVE",
-      "aggregateVersion": 0,
-      "newAggregateVersion": 1
-    },
-    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-    "time": "2026-05-06T14:47:24.127802723Z",
-    "type": "ConfigSnapshotCreatedEvent",
-    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
-    "nonce": "3049",
-    "source": "https://github.com/lightapi/light-portal",
-    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019dfdc2-04d8-7916-b652-239c9676e6d2",
-    "specversion": "1.0",
-    "aggregatetype": "ConfigSnapshot",
-    "datacontenttype": "application/json",
-    "aggregateversion": 1
-  },
-  {
     "id": "019dfe41-b0ac-761e-bd57-31d7981bb26a",
     "data": {
       "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
@@ -999,30 +975,6 @@
     "aggregateversion": 1
   },
   {
-    "id": "019dfe42-8c3d-7c34-b394-738b57409238",
-    "data": {
-      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-      "current": true,
-      "instanceId": "019dd0a4-d0f0-7ca5-804b-8dbd99c40b56",
-      "snapshotId": "019dfe42-8c3a-7f2f-bf47-697be73add96",
-      "description": "disable https",
-      "snapshotType": "USER_SAVE",
-      "aggregateVersion": 0,
-      "newAggregateVersion": 1
-    },
-    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-    "time": "2026-05-06T17:07:47.38978685Z",
-    "type": "ConfigSnapshotCreatedEvent",
-    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
-    "nonce": "3135",
-    "source": "https://github.com/lightapi/light-portal",
-    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019dfe42-8c3a-7f2f-bf47-697be73add96",
-    "specversion": "1.0",
-    "aggregatetype": "ConfigSnapshot",
-    "datacontenttype": "application/json",
-    "aggregateversion": 1
-  },
-  {
     "id": "019dfe44-b1a6-7971-a54d-a2aaa5022c7e",
     "data": {
       "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
@@ -1044,30 +996,6 @@
     "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019dfe44-b1a3-72fe-9480-ee8c0ca0f903",
     "specversion": "1.0",
     "aggregatetype": "ConfigInstanceFile",
-    "datacontenttype": "application/json",
-    "aggregateversion": 1
-  },
-  {
-    "id": "019dfe45-0e21-71c4-9228-9b7c9e4ca5a0",
-    "data": {
-      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-      "current": true,
-      "instanceId": "019dd0a4-d0f0-7ca5-804b-8dbd99c40b56",
-      "snapshotId": "019dfe45-0e1d-72bd-809e-58b85ee78cca",
-      "description": "add openapi.yaml",
-      "snapshotType": "USER_SAVE",
-      "aggregateVersion": 0,
-      "newAggregateVersion": 1
-    },
-    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-    "time": "2026-05-06T17:10:31.713133548Z",
-    "type": "ConfigSnapshotCreatedEvent",
-    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
-    "nonce": "3138",
-    "source": "https://github.com/lightapi/light-portal",
-    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019dfe45-0e1d-72bd-809e-58b85ee78cca",
-    "specversion": "1.0",
-    "aggregatetype": "ConfigSnapshot",
     "datacontenttype": "application/json",
     "aggregateversion": 1
   },
@@ -1166,30 +1094,6 @@
     "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019dd0a4-d0f0-7ca5-804b-8dbd99c40b56|01965b85-6193-7909-8b4c-22069fd3d27a",
     "specversion": "1.0",
     "aggregatetype": "ConfigInstance",
-    "datacontenttype": "application/json",
-    "aggregateversion": 1
-  },
-  {
-    "id": "019e0021-85aa-7c56-bdb7-2620285b499b",
-    "data": {
-      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-      "current": true,
-      "instanceId": "019dd0a4-d0f0-7ca5-804b-8dbd99c40b56",
-      "snapshotId": "019e0021-85a6-7979-b4e4-4aafb02bb4aa",
-      "description": "enable https",
-      "snapshotType": "USER_SAVE",
-      "aggregateVersion": 0,
-      "newAggregateVersion": 1
-    },
-    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-    "time": "2026-05-07T01:50:57.450799816Z",
-    "type": "ConfigSnapshotCreatedEvent",
-    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
-    "nonce": "3416",
-    "source": "https://github.com/lightapi/light-portal",
-    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019e0021-85a6-7979-b4e4-4aafb02bb4aa",
-    "specversion": "1.0",
-    "aggregatetype": "ConfigSnapshot",
     "datacontenttype": "application/json",
     "aggregateversion": 1
   },
@@ -1509,30 +1413,6 @@
     "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019e2825-146d-7a00-b0e8-3671158bb32a|fxva_Ai-Sk6wMtTBPlvV3g",
     "specversion": "1.0",
     "aggregatetype": "ClientToken",
-    "datacontenttype": "application/json",
-    "aggregateversion": 1
-  },
-  {
-    "id": "019e282f-82b6-7300-bd70-71feafa2850b",
-    "data": {
-      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-      "current": true,
-      "instanceId": "019dc655-224f-7c18-a735-f97390966c22",
-      "snapshotId": "019e282f-82ae-79ff-a112-40b68b8bcaef",
-      "description": "initial snapshot",
-      "snapshotType": "USER_SAVE",
-      "aggregateVersion": 0,
-      "newAggregateVersion": 1
-    },
-    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
-    "time": "2026-05-14T20:31:02.838209975Z",
-    "type": "ConfigSnapshotCreatedEvent",
-    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
-    "nonce": "3888",
-    "source": "https://github.com/lightapi/light-portal",
-    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|019e282f-82ae-79ff-a112-40b68b8bcaef",
-    "specversion": "1.0",
-    "aggregatetype": "ConfigSnapshot",
     "datacontenttype": "application/json",
     "aggregateversion": 1
   },
