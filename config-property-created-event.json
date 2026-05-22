@@ -1,0 +1,31 @@
+[
+  {
+    "id": "019e4c96-f859-7fa0-8724-79725feffd9e",
+    "data": {
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "configId": "01964b05-5533-72fe-85f7-b1ed6afdb9e2",
+      "valueType": "string",
+      "propertyId": "019e4c96-f856-7363-95a4-c821768f45b9",
+      "displayOrder": 100,
+      "propertyDesc": "Rust client ca.pem path",
+      "propertyName": "caCertPath",
+      "propertyType": "Config",
+      "resourceType": "none",
+      "propertyValue": "/config-cache",
+      "light4jVersion": "2.3.4",
+      "aggregateVersion": 0,
+      "newAggregateVersion": 1
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-05-21T22:10:22.938004693Z",
+    "type": "ConfigPropertyCreatedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4341",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "019e4c96-f856-7363-95a4-c821768f45b9",
+    "specversion": "1.0",
+    "aggregatetype": "ConfigProperty",
+    "datacontenttype": "application/json",
+    "aggregateversion": 1
+  }
+]
