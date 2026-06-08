@@ -14,6 +14,9 @@ Options:
   --skip-compose-stop  Do not stop local portal-config-loc Docker Compose stacks.
   --skip-db-init-sync  Do not sync portal-config-loc postgres-db/init.sql.
   --skip-snapshot      Do not refresh events.json from event-store/snapshot.
+  --commit-and-push    Commit service-asset changes and push them to GitHub
+                       after a successful update.
+  --commit-message MSG Commit message used with --commit-and-push.
   -h, --help           Show this help.
 
 Environment overrides:
@@ -90,13 +93,18 @@ Events export/conversion:
   SOURCE_HOST_ID            Default: 01964b05-552a-7c4b-9184-6857e7f3dc5f
   TARGET_HOST_ID            Default: SOURCE_HOST_ID
   ADMIN_USER_ID             Default: 01964b05-5532-7c79-8cde-191dcbd421b8
-  EXPORT_SCOPE              Default: global
+  EXPORT_SCOPE              Default: both
   ENTITY_TYPES_JSON         Optional JSON array passed as entityTypes
   SNAPSHOT_INPUT            Optional existing snapshot JSON; skips API export
   SNAPSHOT_OUTPUT           Optional path to keep the exported snapshot JSON
   EVENTS_OUTPUT             Default: $SERVICE_ASSET_DIR/events.json
   BUILD_STATE_FILE          Default: $SERVICE_ASSET_DIR/build-time.txt
   COMPOSE_STATE_FILE        Default: $SERVICE_ASSET_DIR/.update-asset-compose-state
+  GIT_COMMIT_AND_PUSH       Default: false. Set true to commit and push after
+                             a successful update.
+  GIT_COMMIT_MESSAGE        Default: Update service assets YYYY-MM-DD HH:MM UTC
+  GIT_REMOTE                Default: origin
+  GIT_BRANCH                Default: current branch
   PORTAL_COMPOSE_START_DIR  Fallback Compose directory to start before export
                              when no stopped stack was recorded. Default: first
                              existing all-in-lt under LOCAL_PORTAL_CONFIG_DIRS,
@@ -954,11 +962,49 @@ write_build_state() {
   log "updated build record $output_file"
 }
 
+commit_and_push_service_asset() {
+  local remote="${GIT_REMOTE:-origin}"
+  local branch="${GIT_BRANCH:-}"
+  local commit_message="${GIT_COMMIT_MESSAGE:-}"
+
+  [[ -d "$SERVICE_ASSET_DIR/.git" ]] || die "service-asset is not a git worktree: $SERVICE_ASSET_DIR"
+
+  if [[ -z "$branch" ]]; then
+    branch="$(git -C "$SERVICE_ASSET_DIR" rev-parse --abbrev-ref HEAD)"
+  fi
+  [[ -n "$branch" && "$branch" != "HEAD" ]] || die "cannot push from detached HEAD; set GIT_BRANCH"
+
+  if [[ -z "$commit_message" ]]; then
+    commit_message="Update service assets $(date -u '+%Y-%m-%d %H:%M UTC')"
+  fi
+
+  if git -C "$SERVICE_ASSET_DIR" diff --quiet && git -C "$SERVICE_ASSET_DIR" diff --cached --quiet &&
+    [[ -z "$(git -C "$SERVICE_ASSET_DIR" ls-files --others --exclude-standard)" ]]; then
+    log "service-asset worktree is clean; nothing to commit"
+    return 0
+  fi
+
+  log "staging service-asset changes"
+  git -C "$SERVICE_ASSET_DIR" add -A
+
+  if git -C "$SERVICE_ASSET_DIR" diff --cached --quiet; then
+    log "no staged service-asset changes; nothing to commit"
+    return 0
+  fi
+
+  log "committing service-asset changes"
+  git -C "$SERVICE_ASSET_DIR" commit -m "$commit_message"
+
+  log "pushing service-asset commit to $remote/$branch"
+  git -C "$SERVICE_ASSET_DIR" push "$remote" "HEAD:$branch"
+}
+
 force=false
 skip_service=false
 skip_compose_stop=false
 skip_db_init_sync=false
 skip_snapshot=false
+commit_and_push=false
 stopped_compose_keys=()
 stopped_compose_dirs=()
 stopped_compose_args=()
@@ -979,6 +1025,14 @@ while (($#)); do
       ;;
     --skip-snapshot)
       skip_snapshot=true
+      ;;
+    --commit-and-push)
+      commit_and_push=true
+      ;;
+    --commit-message)
+      [[ $# -ge 2 ]] || die "--commit-message requires a value"
+      GIT_COMMIT_MESSAGE="$2"
+      shift
       ;;
     -h|--help)
       usage
@@ -1030,10 +1084,15 @@ PORTAL_EXPORT_READY_URL="${PORTAL_EXPORT_READY_URL:-https://localhost:8440/healt
 SOURCE_HOST_ID="${SOURCE_HOST_ID:-01964b05-552a-7c4b-9184-6857e7f3dc5f}"
 TARGET_HOST_ID="${TARGET_HOST_ID:-$SOURCE_HOST_ID}"
 ADMIN_USER_ID="${ADMIN_USER_ID:-01964b05-5532-7c79-8cde-191dcbd421b8}"
-EXPORT_SCOPE="${EXPORT_SCOPE:-global}"
+EXPORT_SCOPE="${EXPORT_SCOPE:-both}"
 EVENTS_OUTPUT="${EVENTS_OUTPUT:-$SERVICE_ASSET_DIR/events.json}"
 BUILD_STATE_FILE="${BUILD_STATE_FILE:-$SERVICE_ASSET_DIR/build-time.txt}"
 COMPOSE_STATE_FILE="${COMPOSE_STATE_FILE:-$SERVICE_ASSET_DIR/.update-asset-compose-state}"
+GIT_COMMIT_AND_PUSH="${GIT_COMMIT_AND_PUSH:-false}"
+
+if is_true "$GIT_COMMIT_AND_PUSH"; then
+  commit_and_push=true
+fi
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/update-asset.XXXXXX")"
 trap 'rm -rf "$tmp_dir"' EXIT
@@ -1170,4 +1229,11 @@ else
 fi
 
 write_build_state
+
+if [[ "$commit_and_push" == true ]]; then
+  commit_and_push_service_asset
+else
+  log "skipping service-asset git commit/push"
+fi
+
 log "asset update completed successfully"
