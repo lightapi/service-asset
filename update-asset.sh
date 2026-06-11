@@ -53,6 +53,10 @@ Environment overrides:
   EVENT_IMPORTER_IMAGE       Default: networknt/event-importer:latest
   USE_DOCKER_TOOLS           Default: auto. Values: auto, true, false.
                              auto uses Docker images when they exist locally.
+  EVENT_CONVERTER_RUNNER     Default: local. Values: local, docker, auto.
+                             local uses the freshly built event-importer jar for
+                             snapshot-to-events conversion; docker/auto use the
+                             EVENT_IMPORTER_IMAGE when available/required.
   TOOL_DOCKER_NETWORK        Optional Docker network for one-shot tool
                              containers. Default: first restarted Compose
                              project network, or all-in-lt_default.
@@ -704,7 +708,7 @@ convert_snapshot_to_events() {
 
   mkdir -p "$(dirname -- "$events_file")"
 
-  if should_use_docker_tool "$EVENT_IMPORTER_IMAGE"; then
+  if should_use_docker_converter; then
     snapshot_dir="$(cd "$(dirname -- "$snapshot_file")" && pwd)"
     snapshot_name="$(basename -- "$snapshot_file")"
     events_dir="$(cd "$(dirname -- "$events_file")" && pwd)"
@@ -845,6 +849,24 @@ should_use_docker_tool() {
       ;;
     *)
       die "USE_DOCKER_TOOLS must be auto, true, or false: $USE_DOCKER_TOOLS"
+      ;;
+  esac
+}
+
+should_use_docker_converter() {
+  case "$EVENT_CONVERTER_RUNNER" in
+    local)
+      return 1
+      ;;
+    docker)
+      docker image inspect "$EVENT_IMPORTER_IMAGE" >/dev/null 2>&1 || die "Docker image not found: $EVENT_IMPORTER_IMAGE"
+      return 0
+      ;;
+    auto)
+      docker image inspect "$EVENT_IMPORTER_IMAGE" >/dev/null 2>&1
+      ;;
+    *)
+      die "EVENT_CONVERTER_RUNNER must be local, docker, or auto: $EVENT_CONVERTER_RUNNER"
       ;;
   esac
 }
@@ -1115,6 +1137,7 @@ EVENT_EXPORT_START="${EVENT_EXPORT_START:-1970-01-01T00:00:00Z}"
 EVENT_EXPORTER_IMAGE="${EVENT_EXPORTER_IMAGE:-networknt/event-exporter:latest}"
 EVENT_IMPORTER_IMAGE="${EVENT_IMPORTER_IMAGE:-networknt/event-importer:latest}"
 USE_DOCKER_TOOLS="${USE_DOCKER_TOOLS:-auto}"
+EVENT_CONVERTER_RUNNER="${EVENT_CONVERTER_RUNNER:-local}"
 PORTAL_API_BASE_URL="${PORTAL_API_BASE_URL:-https://local.lightapi.net}"
 PORTAL_INSECURE="${PORTAL_INSECURE:-true}"
 EVENT_EXPORT_DB_READY_TIMEOUT="${EVENT_EXPORT_DB_READY_TIMEOUT:-90}"
