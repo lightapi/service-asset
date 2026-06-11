@@ -744,6 +744,47 @@ convert_snapshot_to_events() {
   log "copied converted events to $events_file"
 }
 
+append_snapshot_events() {
+  local events_file="$1"
+  local snapshot_events_file="$tmp_dir/snapshot_events.json"
+  local final_events_file="$tmp_dir/final_events.json"
+  local host_id="${EVENT_EXPORT_HOST_ID:-$SOURCE_HOST_ID}"
+  local args=(-s "1970-01-01T00:00:00.000Z" -t ConfigSnapshotCreatedEvent)
+
+  require_command jq
+
+  if [[ -n "$host_id" ]]; then
+    args+=(-o "$host_id")
+  fi
+
+  if [[ -n "${EVENT_EXPORT_END:-}" ]]; then
+    args+=(-e "$EVENT_EXPORT_END")
+  fi
+
+  if should_use_docker_tool "$EVENT_EXPORTER_IMAGE"; then
+    log "exporting ConfigSnapshotCreatedEvent through Docker event-exporter"
+    local events_dir="$(cd "$(dirname -- "$snapshot_events_file")" && pwd)"
+    local events_name="$(basename -- "$snapshot_events_file")"
+    run_docker_tool "$EVENT_EXPORTER_IMAGE" \
+      -v "$events_dir:/out" \
+      -- \
+      "${args[@]}" \
+      -f "/out/$events_name"
+  else
+    ensure_event_exporter_jar
+    log "exporting ConfigSnapshotCreatedEvent"
+    (cd "$EVENT_EXPORTER_DIR" && ./exporter.sh "${args[@]}" -f "$snapshot_events_file")
+  fi
+
+  if [[ -f "$snapshot_events_file" ]]; then
+    log "filtering and appending snapshot events to events.json"
+    jq -s '.[0] + (.[1] | map(select(.data.current == true)) | sort_by(.data.hostId, .data.instanceId, .time, .id) | group_by([.data.hostId, .data.instanceId]) | map(last))' "$events_file" "$snapshot_events_file" > "$final_events_file"
+    mv "$final_events_file" "$events_file"
+  else
+    die "event-exporter did not create snapshot events file: $snapshot_events_file"
+  fi
+}
+
 wait_for_local_postgres() {
   local timeout="${EVENT_EXPORT_DB_READY_TIMEOUT:-90}"
   local interval="${EVENT_EXPORT_DB_READY_INTERVAL:-3}"
@@ -1215,6 +1256,7 @@ if [[ "$skip_snapshot" == false ]]; then
       wait_for_local_postgres
       export_snapshot_with_event_exporter "$snapshot_file"
       convert_snapshot_to_events "$snapshot_file" "$EVENTS_OUTPUT"
+      append_snapshot_events "$EVENTS_OUTPUT"
     elif [[ "$EVENT_EXPORT_SOURCE" == "events" ]]; then
       wait_for_local_postgres
       export_events_from_event_store "$EVENTS_OUTPUT"
