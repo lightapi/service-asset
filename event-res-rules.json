@@ -1,0 +1,182 @@
+[
+  {
+    "id": "019eec07-23ee-7e3d-a2e6-9e75ce7c0288",
+    "data": {
+      "author": "01964b05-5532-7c79-8cde-191dcbd421b8",
+      "common": "Y",
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "ruleId": "res-row-filter-jwt-claims.lightapi.net",
+      "actions": [
+        {
+          "actionClassName": "com.networknt.rule.ResponseRowFilterAction"
+        }
+      ],
+      "version": "1.0.0",
+      "ruleBody": "{\"ruleId\":\"res-row-filter-jwt-claims.lightapi.net\",\"ruleName\":\"Response row filter based on jwt claims\",\"ruleType\":\"res-fil\",\"common\":\"Y\",\"hostId\":\"01964b05-552a-7c4b-9184-6857e7f3dc5f\",\"version\":\"1.0.0\",\"author\":\"01964b05-5532-7c79-8cde-191dcbd421b8\",\"conditionLanguage\":\"cel\",\"conditionSecurityProfile\":\"strict\",\"expression\":\"    row != null\\n      && (\\n        (\\\"role\\\" in row && \\\"role\\\" in auditInfo.subject_claims.ClaimsMap)\\n        || (\\\"group\\\" in row\\n            && (\\\"grp\\\" in auditInfo.subject_claims.ClaimsMap\\n                || \\\"group\\\" in auditInfo.subject_claims.ClaimsMap))\\n        || (\\\"position\\\" in row\\n            && (\\\"pos\\\" in auditInfo.subject_claims.ClaimsMap\\n                || \\\"position\\\" in auditInfo.subject_claims.ClaimsMap))\\n        || (\\\"attribute\\\" in row\\n            && (\\\"att\\\" in auditInfo.subject_claims.ClaimsMap\\n                || \\\"attribute\\\" in auditInfo.subject_claims.ClaimsMap))\",\"actions\":[{\"actionRef\":\"com.networknt.rule.ResponseRowFilterAction\"}]}",
+      "ruleName": "Response row filter based on jwt claims",
+      "ruleType": "res-fil",
+      "expression": "    row != null\n      && (\n        (\"role\" in row && \"role\" in auditInfo.subject_claims.ClaimsMap)\n        || (\"group\" in row\n            && (\"grp\" in auditInfo.subject_claims.ClaimsMap\n                || \"group\" in auditInfo.subject_claims.ClaimsMap))\n        || (\"position\" in row\n            && (\"pos\" in auditInfo.subject_claims.ClaimsMap\n                || \"position\" in auditInfo.subject_claims.ClaimsMap))\n        || (\"attribute\" in row\n            && (\"att\" in auditInfo.subject_claims.ClaimsMap\n                || \"attribute\" in auditInfo.subject_claims.ClaimsMap))",
+      "aggregateVersion": 0,
+      "conditionLanguage": "cel",
+      "newAggregateVersion": 1,
+      "conditionSecurityProfile": "strict"
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-06-21T21:12:31.471056727Z",
+    "type": "RuleCreatedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4326",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|res-row-filter-jwt-claims.lightapi.net",
+    "specversion": "1.0",
+    "aggregatetype": "Rule",
+    "datacontenttype": "application/json",
+    "aggregateversion": 1
+  },
+  {
+    "id": "019eec1a-f335-7861-ba62-46ea33385b1a",
+    "data": {
+      "active": true,
+      "author": "01964b05-5532-7c79-8cde-191dcbd421b8",
+      "common": "Y",
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "ruleId": "res-row-filter-jwt-claims.lightapi.net",
+      "actions": [
+        {
+          "actionClassName": "com.networknt.rule.ResponseRowFilterAction"
+        }
+      ],
+      "version": "1.0.0",
+      "ruleBody": "{\"ruleId\":\"res-row-filter-jwt-claims.lightapi.net\",\"ruleName\":\"Response row filter based on jwt claims\",\"ruleType\":\"res-fil\",\"common\":\"Y\",\"hostId\":\"01964b05-552a-7c4b-9184-6857e7f3dc5f\",\"version\":\"1.0.0\",\"author\":\"01964b05-5532-7c79-8cde-191dcbd421b8\",\"conditionLanguage\":\"cel\",\"conditionSecurityProfile\":\"strict\",\"expression\":\"row != null\\n&& (\\n(\\\"role\\\" in row && \\\"role\\\" in auditInfo.subject_claims.ClaimsMap)\\n|| (\\\"group\\\" in row\\n&& (\\\"grp\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"group\\\" in auditInfo.subject_claims.ClaimsMap))\\n|| (\\\"position\\\" in row\\n&& (\\\"pos\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"position\\\" in auditInfo.subject_claims.ClaimsMap))\\n|| (\\\"attribute\\\" in row\\n&& (\\\"att\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"attribute\\\" in auditInfo.subject_claims.ClaimsMap))\",\"actions\":[{\"actionClassName\":\"com.networknt.rule.ResponseRowFilterAction\"}]}",
+      "ruleName": "Response row filter based on jwt claims",
+      "ruleType": "res-fil",
+      "updateTs": "2026-06-21T21:12:31.471057Z",
+      "expression": "row != null\n&& (\n(\"role\" in row && \"role\" in auditInfo.subject_claims.ClaimsMap)\n|| (\"group\" in row\n&& (\"grp\" in auditInfo.subject_claims.ClaimsMap\n|| \"group\" in auditInfo.subject_claims.ClaimsMap))\n|| (\"position\" in row\n&& (\"pos\" in auditInfo.subject_claims.ClaimsMap\n|| \"position\" in auditInfo.subject_claims.ClaimsMap))\n|| (\"attribute\" in row\n&& (\"att\" in auditInfo.subject_claims.ClaimsMap\n|| \"attribute\" in auditInfo.subject_claims.ClaimsMap))",
+      "updateUser": "01964b05-5532-7c79-8cde-191dcbd421b8",
+      "aggregateVersion": 1,
+      "conditionLanguage": "cel",
+      "newAggregateVersion": 2,
+      "conditionSecurityProfile": "strict"
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-06-21T21:34:09.717715202Z",
+    "type": "RuleUpdatedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4332",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|res-row-filter-jwt-claims.lightapi.net",
+    "specversion": "1.0",
+    "aggregatetype": "Rule",
+    "datacontenttype": "application/json",
+    "aggregateversion": "2"
+  },
+  {
+    "id": "019eec1e-107a-7def-973d-eaa1a2c59005",
+    "data": {
+      "author": "01964b05-5532-7c79-8cde-191dcbd421b8",
+      "common": "Y",
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "ruleId": "res-column-filter-jwt-claims.lightapi.net",
+      "actions": [
+        {
+          "actionClassName": "com.networknt.rule.ResponseColumnFilterAction"
+        }
+      ],
+      "version": "1.0.0",
+      "ruleBody": "{\"ruleId\":\"res-column-filter-jwt-claims.lightapi.net\",\"ruleName\":\"Response column filter bsed on jwt claims\",\"ruleType\":\"res-fil\",\"common\":\"Y\",\"hostId\":\"01964b05-552a-7c4b-9184-6857e7f3dc5f\",\"version\":\"1.0.0\",\"author\":\"01964b05-5532-7c79-8cde-191dcbd421b8\",\"conditionLanguage\":\"cel\",\"conditionSecurityProfile\":\"strict\",\"expression\":\"col != null\\n&& (\\n(\\\"role\\\" in col && \\\"role\\\" in auditInfo.subject_claims.ClaimsMap)\\n|| (\\\"group\\\" in col\\n&& (\\\"grp\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"group\\\" in auditInfo.subject_claims.ClaimsMap))\\n|| (\\\"position\\\" in col\\n&& (\\\"pos\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"position\\\" in auditInfo.subject_claims.ClaimsMap))\\n|| (\\\"attribute\\\" in col\\n&& (\\\"att\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"attribute\\\" in auditInfo.subject_claims.ClaimsMap))\\n)\",\"actions\":[{\"actionClassName\":\"com.networknt.rule.ResponseColumnFilterAction\"}]}",
+      "ruleName": "Response column filter bsed on jwt claims",
+      "ruleType": "res-fil",
+      "expression": "col != null\n&& (\n(\"role\" in col && \"role\" in auditInfo.subject_claims.ClaimsMap)\n|| (\"group\" in col\n&& (\"grp\" in auditInfo.subject_claims.ClaimsMap\n|| \"group\" in auditInfo.subject_claims.ClaimsMap))\n|| (\"position\" in col\n&& (\"pos\" in auditInfo.subject_claims.ClaimsMap\n|| \"position\" in auditInfo.subject_claims.ClaimsMap))\n|| (\"attribute\" in col\n&& (\"att\" in auditInfo.subject_claims.ClaimsMap\n|| \"attribute\" in auditInfo.subject_claims.ClaimsMap))\n)",
+      "aggregateVersion": 0,
+      "conditionLanguage": "cel",
+      "newAggregateVersion": 1,
+      "conditionSecurityProfile": "strict"
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-06-21T21:37:33.818907943Z",
+    "type": "RuleCreatedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4333",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|res-column-filter-jwt-claims.lightapi.net",
+    "specversion": "1.0",
+    "aggregatetype": "Rule",
+    "datacontenttype": "application/json",
+    "aggregateversion": 1
+  },
+  {
+    "id": "019eec1e-a91b-7b59-89ba-802c12f35d59",
+    "data": {
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "ruleId": "response-row-filter.lightapi.net",
+      "newAggregateVersion": 2
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-06-21T21:38:12.891750044Z",
+    "type": "RuleDeletedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4335",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|response-row-filter.lightapi.net",
+    "specversion": "1.0",
+    "aggregatetype": "Rule",
+    "datacontenttype": "application/json",
+    "aggregateversion": "2"
+  },
+  {
+    "id": "019eecc0-b5aa-7ff2-a9a2-c820a1d8bf69",
+    "data": {
+      "active": true,
+      "author": "01964b05-5532-7c79-8cde-191dcbd421b8",
+      "common": "Y",
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "ruleId": "res-row-filter-jwt-claims.lightapi.net",
+      "actions": [
+        {
+          "actionClassName": "com.networknt.rule.ResponseRowFilterAction"
+        }
+      ],
+      "version": "1.0.0",
+      "ruleBody": "{\"ruleId\":\"res-row-filter-jwt-claims.lightapi.net\",\"ruleName\":\"Response row filter based on jwt claims\",\"ruleType\":\"res-fil\",\"common\":\"Y\",\"hostId\":\"01964b05-552a-7c4b-9184-6857e7f3dc5f\",\"version\":\"1.0.0\",\"author\":\"01964b05-5532-7c79-8cde-191dcbd421b8\",\"conditionLanguage\":\"cel\",\"conditionSecurityProfile\":\"strict\",\"expression\":\"row != null\\n&& (\\n(\\\"role\\\" in row && \\\"role\\\" in auditInfo.subject_claims.ClaimsMap)\\n|| (\\\"group\\\" in row\\n&& (\\\"grp\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"group\\\" in auditInfo.subject_claims.ClaimsMap))\\n|| (\\\"position\\\" in row\\n&& (\\\"pos\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"position\\\" in auditInfo.subject_claims.ClaimsMap))\\n|| (\\\"attribute\\\" in row\\n&& (\\\"att\\\" in auditInfo.subject_claims.ClaimsMap\\n|| \\\"attribute\\\" in auditInfo.subject_claims.ClaimsMap))\\n)\",\"actions\":[{\"actionClassName\":\"com.networknt.rule.ResponseRowFilterAction\"}]}",
+      "ruleName": "Response row filter based on jwt claims",
+      "ruleType": "res-fil",
+      "updateTs": "2026-06-21T21:34:09.717715Z",
+      "expression": "row != null\n&& (\n(\"role\" in row && \"role\" in auditInfo.subject_claims.ClaimsMap)\n|| (\"group\" in row\n&& (\"grp\" in auditInfo.subject_claims.ClaimsMap\n|| \"group\" in auditInfo.subject_claims.ClaimsMap))\n|| (\"position\" in row\n&& (\"pos\" in auditInfo.subject_claims.ClaimsMap\n|| \"position\" in auditInfo.subject_claims.ClaimsMap))\n|| (\"attribute\" in row\n&& (\"att\" in auditInfo.subject_claims.ClaimsMap\n|| \"attribute\" in auditInfo.subject_claims.ClaimsMap))\n)",
+      "updateUser": "01964b05-5532-7c79-8cde-191dcbd421b8",
+      "aggregateVersion": 2,
+      "conditionLanguage": "cel",
+      "newAggregateVersion": 3,
+      "conditionSecurityProfile": "strict"
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-06-22T00:35:12.939030091Z",
+    "type": "RuleUpdatedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4363",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|res-row-filter-jwt-claims.lightapi.net",
+    "specversion": "1.0",
+    "aggregatetype": "Rule",
+    "datacontenttype": "application/json",
+    "aggregateversion": "3"
+  },
+  {
+    "id": "019eeee3-b957-7c06-967b-04d4b7501cac",
+    "data": {
+      "hostId": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+      "ruleId": "test-allow-role-based-access-control.lightapi.net",
+      "newAggregateVersion": 2
+    },
+    "host": "01964b05-552a-7c4b-9184-6857e7f3dc5f",
+    "time": "2026-06-22T10:32:42.071978882Z",
+    "type": "RuleDeletedEvent",
+    "user": "01964b05-5532-7c79-8cde-191dcbd421b8",
+    "nonce": "4376",
+    "source": "https://github.com/lightapi/light-portal",
+    "subject": "01964b05-552a-7c4b-9184-6857e7f3dc5f|test-allow-role-based-access-control.lightapi.net",
+    "specversion": "1.0",
+    "aggregatetype": "Rule",
+    "datacontenttype": "application/json",
+    "aggregateversion": "2"
+  }
+]
