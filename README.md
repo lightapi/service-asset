@@ -1,6 +1,11 @@
 # service-asset
-command and query service jar files for ui developer
-lightapi and signin ui asset for full stack developer
+
+> **Archived:** This repository has been retired. Release assets are staged by
+> the workspace `update-asset.sh`, uploaded to Cloudflare R2, and consumed from
+> the CDN by `portal-config-loc`, `portal-config-dev`, and
+> `light-portal-install`. Do not use this repository for new releases.
+
+The remaining files are retained only as historical release artifacts.
 
 
 
